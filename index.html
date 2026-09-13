@@ -124,7 +124,7 @@
             font-weight: 600;
         }
 
-        /* ----- المحتوى الرئيسي بتخطيط الـ 3 أعمدة ----- */
+        /* ----- المحتوى الرئيسي ----- */
         #main-content {
             opacity: 0;
             display: none;
@@ -136,7 +136,8 @@
 
         .layout-wrapper {
             display: grid;
-            grid-template-columns: 1fr 1.5fr 1fr;
+            /* كبرنا مساحة الرسالة في النص عشان الصور متبقاش عملاقة بزيادة */
+            grid-template-columns: 1fr 1.8fr 1fr;
             gap: 40px;
             align-items: start;
         }
@@ -145,8 +146,9 @@
         .side-column {
             display: flex;
             flex-direction: column;
-            gap: 50px;
-            padding-top: 40px;
+            gap: 45px;
+            padding-top: 20px;
+            align-items: center; /* السطر ده بيمنع الكروت انها تتمط وتاخد مساحة فاضية */
         }
 
         .right-column {
@@ -211,34 +213,33 @@
             font-weight: 800;
         }
 
-        /* ----- الصور بتأثيرات الزجاج والنيون ----- */
+        /* ----- تصميم كارت الصور الجديد (البرواز المظبوط) ----- */
         .photo-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 12px;
+            border-radius: 16px;
+            padding: 10px; /* برواز رفيع وشيك حوالين الصورة */
+            width: 100%;
+            max-width: 320px; /* أقصى عرض عشان الصورة متبقاش ضخمة */
             box-shadow: 0 15px 35px rgba(0,0,0,0.4);
             backdrop-filter: blur(10px);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            /* زاوية الميلان متغيرة */
             transform: rotate(var(--rot, 0deg)); 
         }
 
         .photo-card:hover {
-            transform: translateY(-10px) rotate(0deg);
+            transform: translateY(-10px) rotate(0deg) scale(1.03);
             border-color: rgba(255, 75, 114, 0.5);
             box-shadow: 0 25px 45px rgba(0,0,0,0.6), 0 0 25px var(--accent-glow);
             z-index: 50;
         }
 
-        /* التعديل الجذري: إظهار الصورة بالكامل بدون أي زووم أو قص */
+        /* الصورة نفسها بتفرد نفسها جوه البرواز بالطول والعرض الطبيعي بتاعها */
         .photo-card img {
-            max-width: 100%;
-            height: auto;
+            width: 100%; /* بتملى عرض الكارت */
+            height: auto; /* الطول بيتظبط تلقائي بناءً على العرض (بدون زووم أو قص) */
             display: block;
-            border-radius: 12px;
-            object-fit: contain; /* ده اللي بيضمن إن الصورة تظهر بالكامل من غير ما يتقص منها أي حاجة */
-            margin: 0 auto;
+            border-radius: 8px;
         }
 
         /* القلوب المتطايرة */
@@ -270,7 +271,7 @@
             .main-title { font-size: 3rem; letter-spacing: 3px; }
             .side-column {
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
                 gap: 30px;
                 padding-top: 10px;
                 margin-top: 0;
