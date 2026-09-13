@@ -129,16 +129,15 @@
             opacity: 0;
             display: none;
             transition: opacity 1s ease;
-            padding: 60px 20px 80px 20px;
+            padding: 40px 15px 80px 15px;
             max-width: 1400px;
             margin: 0 auto;
         }
 
         .layout-wrapper {
             display: grid;
-            /* كبرنا مساحة الرسالة في النص عشان الصور متبقاش عملاقة بزيادة */
             grid-template-columns: 1fr 1.8fr 1fr;
-            gap: 40px;
+            gap: 30px;
             align-items: start;
         }
 
@@ -146,19 +145,19 @@
         .side-column {
             display: flex;
             flex-direction: column;
-            gap: 45px;
-            padding-top: 20px;
-            align-items: center; /* السطر ده بيمنع الكروت انها تتمط وتاخد مساحة فاضية */
+            gap: 25px;
+            padding-top: 10px;
+            align-items: center; 
         }
 
         .right-column {
-            margin-top: 80px; 
+            margin-top: 60px; 
         }
 
-        /* عمود الرسالة في المنتصف (ثابت عند النزول) */
+        /* عمود الرسالة في المنتصف */
         .center-column {
             position: sticky;
-            top: 100px;
+            top: 30px;
             display: flex;
             justify-content: center;
             z-index: 10;
@@ -168,8 +167,8 @@
         .message-container {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 28px;
-            padding: 55px 35px;
+            border-radius: 24px;
+            padding: 40px 25px;
             width: 100%;
             text-align: center;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(255, 75, 114, 0.2);
@@ -178,14 +177,14 @@
 
         .main-title {
             font-family: 'Poppins', 'Cairo', sans-serif;
-            font-size: 4rem;
+            font-size: 3.5rem;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 5px;
+            letter-spacing: 4px;
             background: linear-gradient(135deg, #ff4b72 0%, #ff85a2 50%, #ffffff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             text-shadow: 0 10px 25px rgba(255, 75, 114, 0.3);
             display: inline-block;
             position: relative;
@@ -197,15 +196,15 @@
             width: 70%;
             height: 4px;
             background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
-            margin: 15px auto 0 auto;
+            margin: 12px auto 0 auto;
             border-radius: 4px;
         }
 
         .message-body {
-            line-height: 2.3;
-            font-size: 1.25rem;
+            line-height: 2.2;
+            font-size: 1.15rem;
             color: #e2e8f0;
-            margin-top: 25px;
+            margin-top: 20px;
         }
 
         .highlight {
@@ -213,33 +212,34 @@
             font-weight: 800;
         }
 
-        /* ----- تصميم كارت الصور الجديد (البرواز المظبوط) ----- */
+        /* ----- تصميم كارت الصور المتكيف (يحافظ على حجم وأبعاد الصورة 100%) ----- */
         .photo-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 10px; /* برواز رفيع وشيك حوالين الصورة */
+            border-radius: 14px;
+            padding: 8px; 
             width: 100%;
-            max-width: 320px; /* أقصى عرض عشان الصورة متبقاش ضخمة */
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            max-width: 280px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
             backdrop-filter: blur(10px);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s ease;
             transform: rotate(var(--rot, 0deg)); 
         }
 
         .photo-card:hover {
-            transform: translateY(-10px) rotate(0deg) scale(1.03);
+            transform: translateY(-5px) rotate(0deg) scale(1.02);
             border-color: rgba(255, 75, 114, 0.5);
-            box-shadow: 0 25px 45px rgba(0,0,0,0.6), 0 0 25px var(--accent-glow);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 20px var(--accent-glow);
             z-index: 50;
         }
 
-        /* الصورة نفسها بتفرد نفسها جوه البرواز بالطول والعرض الطبيعي بتاعها */
+        /* الصورة تأخذ أبعادها الطبيعية بالكامل وتتطابق مع الشاشة بدون قص أو زووم */
         .photo-card img {
-            width: 100%; /* بتملى عرض الكارت */
-            height: auto; /* الطول بيتظبط تلقائي بناءً على العرض (بدون زووم أو قص) */
+            width: 100%;
+            height: auto;
             display: block;
             border-radius: 8px;
+            object-fit: contain;
         }
 
         /* القلوب المتطايرة */
@@ -257,26 +257,49 @@
             100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
 
-        /* استجابة الشاشات للهواتف والتابلت */
-        @media (max-width: 1100px) {
+        /* استجابة شاشات التليفون والموبايل بدقة فائقة */
+        @media (max-width: 900px) {
+            body {
+                padding: 10px;
+            }
+            #main-content {
+                padding: 20px 10px;
+            }
             .layout-wrapper {
-                grid-template-columns: 1fr;
-                gap: 40px;
+                display: flex;
+                flex-direction: column;
+                gap: 25px;
             }
             .center-column {
                 position: relative;
                 top: 0;
-                order: -1; 
+                order: -1; /* الرسالة في أول شاشة الموبايل دايماً */
+                width: 100%;
             }
-            .main-title { font-size: 3rem; letter-spacing: 3px; }
+            .message-container {
+                padding: 30px 20px;
+            }
+            .main-title {
+                font-size: 2.5rem;
+                letter-spacing: 2px;
+            }
+            .message-body {
+                font-size: 1.05rem;
+            }
             .side-column {
+                width: 100%;
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-                gap: 30px;
-                padding-top: 10px;
+                grid-template-columns: repeat(2, 1fr); /* صورتين جنب بعض على الموبايل عشان الشاشة تبقى منظمة وماخدش سكرول طويل أوي */
+                gap: 15px;
+                padding-top: 0;
+            }
+            .right-column {
                 margin-top: 0;
             }
-            .photo-card { transform: rotate(0deg); }
+            .photo-card {
+                max-width: 100%;
+                transform: rotate(0deg) !important; /* إلغاء الميلان على الموبايل لسهولة الرؤية */
+            }
         }
     </style>
 </head>
@@ -300,18 +323,22 @@
         
         <div class="layout-wrapper">
             
-            <!-- العمود الجانبي الأول (اليسار) -->
+            <!-- العمود الجانبي الأول (اليسار) - 4 صور بأبعادها الأصلية -->
             <div class="side-column left-column">
-                <div class="photo-card" style="--rot: -4deg;">
-                    <img src="https://i.ibb.co/cSRBYwx8/image.jpg" alt="Fatma">
+                <div class="photo-card" style="--rot: -3deg;">
+                    <img src="https://i.ibb.co/cSRBYwx8/image.jpg" alt="Fatma 1">
                 </div>
 
-                <div class="photo-card" style="--rot: 3deg;">
-                    <img src="https://i.ibb.co/tPwqpz8S/image.jpg" alt="Fatma">
+                <div class="photo-card" style="--rot: 2deg;">
+                    <img src="https://i.ibb.co/6761WkxW/image.jpg" alt="Fatma 2">
                 </div>
 
                 <div class="photo-card" style="--rot: -2deg;">
-                    <img src="https://i.ibb.co/V0rdhKNq/image.jpg" alt="Fatma">
+                    <img src="https://i.ibb.co/pvrWQXJd/image.jpg" alt="Fatma 3">
+                </div>
+
+                <div class="photo-card" style="--rot: 3deg;">
+                    <img src="https://i.ibb.co/V0rdhKNq/image.jpg" alt="Fatma 4">
                 </div>
             </div>
 
@@ -327,18 +354,22 @@
                 </div>
             </div>
 
-            <!-- العمود الجانبي الثاني (اليمين) -->
+            <!-- العمود الجانبي الثاني (اليمين) - 4 صور بأبعادها الأصلية -->
             <div class="side-column right-column">
-                <div class="photo-card" style="--rot: 4deg;">
-                    <img src="https://i.ibb.co/QF7ZnTD0/image.jpg" alt="Fatma">
+                <div class="photo-card" style="--rot: 3deg;">
+                    <img src="https://i.ibb.co/QF7ZnTD0/image.jpg" alt="Fatma 5">
                 </div>
 
                 <div class="photo-card" style="--rot: -3deg;">
-                    <img src="https://i.ibb.co/Vc1pcJRB/image.jpg" alt="Fatma">
+                    <img src="https://i.ibb.co/tPwqpz8S/image.jpg" alt="Fatma 6">
                 </div>
 
                 <div class="photo-card" style="--rot: 2deg;">
-                    <img src="https://i.ibb.co/MkMG3rRB/image.jpg" alt="Fatma">
+                    <img src="https://i.ibb.co/Vc1pcJRB/image.jpg" alt="Fatma 7">
+                </div>
+
+                <div class="photo-card" style="--rot: -2deg;">
+                    <img src="https://i.ibb.co/MkMG3rRB/image.jpg" alt="Fatma 8">
                 </div>
             </div>
 
