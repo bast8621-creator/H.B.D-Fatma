@@ -150,7 +150,7 @@
         }
 
         .right-column {
-            margin-top: 80px; /* تفاوت بسيط لكسر الملل البصري */
+            margin-top: 80px; 
         }
 
         /* عمود الرسالة في المنتصف (ثابت عند النزول) */
@@ -224,7 +224,6 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            /* زاوية الميلان متغيرة حسب المتغير في الكود */
             transform: rotate(var(--rot, 0deg)); 
         }
 
@@ -245,18 +244,12 @@
             align-items: center;
         }
 
+        /* التعديل الجديد: عرض الصورة بالكامل بدون أي زووم أو قص */
         .photo-card img {
             width: 100%;
-            height: auto;
-            max-height: 400px;
-            object-fit: contain;
+            height: auto; /* تأخذ الطول الطبيعي للصورة تماماً */
             display: block;
             border-radius: 14px;
-            transition: transform 0.5s ease;
-        }
-
-        .photo-card:hover img {
-            transform: scale(1.03);
         }
 
         /* القلوب المتطايرة */
@@ -283,7 +276,7 @@
             .center-column {
                 position: relative;
                 top: 0;
-                order: -1; /* رفع الرسالة للأعلى دائماً في الموبايل */
+                order: -1; 
             }
             .main-title { font-size: 3rem; letter-spacing: 3px; }
             .side-column {
@@ -293,7 +286,6 @@
                 padding-top: 10px;
                 margin-top: 0;
             }
-            /* إلغاء زوايا الميلان في الموبايل ليكون شكلها مرتب أكثر */
             .photo-card { transform: rotate(0deg); }
         }
     </style>
