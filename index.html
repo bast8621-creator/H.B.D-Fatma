@@ -124,14 +124,42 @@
             font-weight: 600;
         }
 
-        /* ----- المحتوى الرئيسي ----- */
+        /* ----- المحتوى الرئيسي بتخطيط الـ 3 أعمدة ----- */
         #main-content {
             opacity: 0;
             display: none;
             transition: opacity 1s ease;
             padding: 60px 20px 80px 20px;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
+        }
+
+        .layout-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        /* أعمدة الصور الجانبية */
+        .side-column {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+            padding-top: 40px;
+        }
+
+        .right-column {
+            margin-top: 80px; /* تفاوت بسيط لكسر الملل البصري */
+        }
+
+        /* عمود الرسالة في المنتصف (ثابت عند النزول) */
+        .center-column {
+            position: sticky;
+            top: 100px;
+            display: flex;
+            justify-content: center;
+            z-index: 10;
         }
 
         /* كارت الرسالة والترحيب */
@@ -140,19 +168,18 @@
             border: 1px solid var(--border-color);
             border-radius: 28px;
             padding: 55px 35px;
-            max-width: 900px;
-            margin: 0 auto 70px auto;
+            width: 100%;
             text-align: center;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 75, 114, 0.15);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(255, 75, 114, 0.2);
             backdrop-filter: blur(16px);
         }
 
         .main-title {
             font-family: 'Poppins', 'Cairo', sans-serif;
-            font-size: 4.8rem;
+            font-size: 4rem;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 6px;
+            letter-spacing: 5px;
             background: linear-gradient(135deg, #ff4b72 0%, #ff85a2 50%, #ffffff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -174,13 +201,9 @@
 
         .message-body {
             line-height: 2.3;
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             color: #e2e8f0;
             margin-top: 25px;
-        }
-
-        .message-body p {
-            margin-bottom: 18px;
         }
 
         .highlight {
@@ -188,33 +211,28 @@
             font-weight: 800;
         }
 
-        /* ----- معرض الصور الحديث ----- */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
-            padding: 10px;
-        }
-
-        /* كروت براويز النيون الزجاجية */
+        /* ----- الصور بتأثيرات الزجاج والنيون ----- */
         .photo-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 20px;
-            padding: 18px;
+            padding: 16px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.4);
             backdrop-filter: blur(10px);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
             overflow: hidden;
+            /* زاوية الميلان متغيرة حسب المتغير في الكود */
+            transform: rotate(var(--rot, 0deg)); 
         }
 
         .photo-card:hover {
-            transform: translateY(-10px) scale(1.02);
+            transform: translateY(-10px) scale(1.05) rotate(0deg);
             border-color: rgba(255, 75, 114, 0.5);
             box-shadow: 0 25px 45px rgba(0,0,0,0.6), 0 0 25px var(--accent-glow);
+            z-index: 50;
         }
 
         .photo-wrapper {
@@ -227,11 +245,10 @@
             align-items: center;
         }
 
-        /* العرض الكامل للصورة بدون قص التفاصيل */
         .photo-card img {
             width: 100%;
             height: auto;
-            max-height: 450px;
+            max-height: 400px;
             object-fit: contain;
             display: block;
             border-radius: 14px;
@@ -240,16 +257,6 @@
 
         .photo-card:hover img {
             transform: scale(1.03);
-        }
-
-        .photo-caption {
-            margin-top: 18px;
-            padding: 5px 10px;
-            text-align: center;
-            color: #f1f5f9;
-            font-weight: 700;
-            font-size: 1.1rem;
-            width: 100%;
         }
 
         /* القلوب المتطايرة */
@@ -267,12 +274,27 @@
             100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
 
-        @media (max-width: 768px) {
+        /* استجابة الشاشات للهواتف والتابلت */
+        @media (max-width: 1100px) {
+            .layout-wrapper {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .center-column {
+                position: relative;
+                top: 0;
+                order: -1; /* رفع الرسالة للأعلى دائماً في الموبايل */
+            }
             .main-title { font-size: 3rem; letter-spacing: 3px; }
-            .message-container { padding: 35px 20px; margin-bottom: 40px; }
-            .message-body { font-size: 1.1rem; line-height: 2; }
-            .gallery-grid { grid-template-columns: 1fr; gap: 30px; }
-            .photo-card img { max-height: 380px; }
+            .side-column {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 30px;
+                padding-top: 10px;
+                margin-top: 0;
+            }
+            /* إلغاء زوايا الميلان في الموبايل ليكون شكلها مرتب أكثر */
+            .photo-card { transform: rotate(0deg); }
         }
     </style>
 </head>
@@ -294,64 +316,60 @@
     <!-- 🎈 المحتوى الرئيسي للموقع -->
     <div id="main-content">
         
-        <div class="message-container">
-            <h1 class="main-title">H.B.D Fatma</h1>
-
-            <div class="message-body">
-                <p>كل سنة وانتي طيبة يا أحلى وأجمل <span class="highlight">فاطمة</span> ❤️</p>
-                <p>نفضل نشوف ضحكتك اللي بتبسط كل اللي حواليكي بتنور الدنيا كلها 😊✨</p>
-                <p>
-                    يا رب تكون سنة جديدة مليانة بالخير والنجاح وراحة البال، وتفضلي دايماً الشخص اللطيف الجميل صاحب الأحاسيس المميزة والـ Mood الروعة اللي بيفرح أي مكان بتبقي فيه! ✨🎬
-                </p>
-                <p style="font-size: 1.05rem; color: var(--subtext-color); margin-top: 30px;">
-                    أتمنى ليكي أيام حلوة شبه قلبك الجميلة! 🎈🎂
-                </p>
-            </div>
-        </div>
-
-        <!-- معرض الصور المنسق والموزع بتصميم زجاجي نيون -->
-        <div class="gallery-grid">
+        <div class="layout-wrapper">
             
-            <div class="photo-card">
-                <div class="photo-wrapper">
-                    <img src="https://i.ibb.co/cSRBYwx8/image.jpg" alt="Fatma">
+            <!-- العمود الجانبي الأول (اليسار) -->
+            <div class="side-column left-column">
+                <div class="photo-card" style="--rot: -4deg;">
+                    <div class="photo-wrapper">
+                        <img src="https://i.ibb.co/cSRBYwx8/image.jpg" alt="Fatma">
+                    </div>
                 </div>
-                <div class="photo-caption">جمال المكان والروح ✨</div>
+
+                <div class="photo-card" style="--rot: 3deg;">
+                    <div class="photo-wrapper">
+                        <img src="https://i.ibb.co/tPwqpz8S/image.jpg" alt="Fatma">
+                    </div>
+                </div>
+
+                <div class="photo-card" style="--rot: -2deg;">
+                    <div class="photo-wrapper">
+                        <img src="https://i.ibb.co/V0rdhKNq/image.jpg" alt="Fatma">
+                    </div>
+                </div>
             </div>
 
-            <div class="photo-card">
-                <div class="photo-wrapper">
-                    <img src="https://i.ibb.co/QF7ZnTD0/image.jpg" alt="Fatma">
+            <!-- عمود المنتصف (الرسالة الثابتة) -->
+            <div class="center-column">
+                <div class="message-container">
+                    <h1 class="main-title">H.B.D Fatma</h1>
+                    <div class="message-body">
+                        <p>
+                            كل سنة وانتي طيبة يا اجمل واحلي <span class="highlight">فاطمة</span> ونفضل نشوف ضحكتك دايما اللي بتضحكني وبتفرح اي حد يشوفها ونسمع صوتك التحفة 😭❤️ وتحققي اللي نفسك فيه دايما و تنسي كل اللي يضايقك وهمومك وتبقي احلي سنة اللي تستاهل احلي فاطمة ❤️😍
+                        </p>
+                    </div>
                 </div>
-                <div class="photo-caption">ضحكة من القلب 🤍</div>
             </div>
 
-            <div class="photo-card">
-                <div class="photo-wrapper">
-                    <img src="https://i.ibb.co/tPwqpz8S/image.jpg" alt="Fatma">
+            <!-- العمود الجانبي الثاني (اليمين) -->
+            <div class="side-column right-column">
+                <div class="photo-card" style="--rot: 4deg;">
+                    <div class="photo-wrapper">
+                        <img src="https://i.ibb.co/QF7ZnTD0/image.jpg" alt="Fatma">
+                    </div>
                 </div>
-                <div class="photo-caption">أحلى المودز واللحظات 🌃</div>
-            </div>
 
-            <div class="photo-card">
-                <div class="photo-wrapper">
-                    <img src="https://i.ibb.co/Vc1pcJRB/image.jpg" alt="Fatma">
+                <div class="photo-card" style="--rot: -3deg;">
+                    <div class="photo-wrapper">
+                        <img src="https://i.ibb.co/Vc1pcJRB/image.jpg" alt="Fatma">
+                    </div>
                 </div>
-                <div class="photo-caption">ذكريات ورايقات 🃏🎬</div>
-            </div>
 
-            <div class="photo-card">
-                <div class="photo-wrapper">
-                    <img src="https://i.ibb.co/V0rdhKNq/image.jpg" alt="Fatma">
+                <div class="photo-card" style="--rot: 2deg;">
+                    <div class="photo-wrapper">
+                        <img src="https://i.ibb.co/MkMG3rRB/image.jpg" alt="Fatma">
+                    </div>
                 </div>
-                <div class="photo-caption">خروجات وأوقات لطيفة 🍦🍿</div>
-            </div>
-
-            <div class="photo-card">
-                <div class="photo-wrapper">
-                    <img src="https://i.ibb.co/MkMG3rRB/image.jpg" alt="Fatma">
-                </div>
-                <div class="photo-caption">الأنمي والأجواء الدافئة 🌸</div>
             </div>
 
         </div>
