@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Fatma 🎉</title>
+    <!-- خطوط جوجل عربية وأنيقة -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Reem+Kufi:wght@600;700&family=Poppins:wght@800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f1016;
+            --card-bg: #1a1c26;
+            --accent-color: #ff4b72;
+            --accent-glow: rgba(255, 75, 114, 0.4);
+            --text-color: #f1f5f9;
+            --subtext-color: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ----- شاشة كلمة المرور ----- */
+        #login-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, #1e1b2e 0%, #0f1016 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.8s ease, visibility 0.8s;
+        }
+
+        .login-card {
+            background: rgba(26, 28, 38, 0.8);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 15px var(--accent-glow);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .login-card h2 {
+            font-family: 'Reem Kufi', sans-serif;
+            color: var(--accent-color);
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .login-card p {
+            color: var(--subtext-color);
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 20px;
+            background: #0f1016;
+            border: 2px solid #2e3245;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #ff4b72, #d92651);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s transform, 0.3s box-shadow;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px var(--accent-glow);
+        }
+
+        .error-msg {
+            color: #ff4757;
+            font-size: 0.85rem;
+            margin-top: 10px;
+            display: none;
+        }
+
+        /* ----- محتوى الموقع الرئيسي ----- */
+        #main-content {
+            opacity: 0;
+            display: none;
+            transition: opacity 1s ease;
+            padding: 50px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* تنسيق كارت الرسالة مع العنوان الرئيسي */
+        .message-container {
+            background: rgba(26, 28, 38, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 50px 30px;
+            max-width: 850px;
+            margin: 0 auto 60px auto;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(255, 75, 114, 0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        /* العنوان العريض والمنسق مثل كارت العنوان */
+        .main-title {
+            font-family: 'Poppins', 'Cairo', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            background: linear-gradient(135deg, #ff4b72, #ff85a2, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 25px;
+            text-shadow: 0 10px 20px rgba(255, 75, 114, 0.3);
+            display: inline-block;
+            position: relative;
+        }
+
+        .main-title::after {
+            content: '';
+            display: block;
+            width: 60%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+            margin: 10px auto 0 auto;
+            border-radius: 2px;
+        }
+
+        .message-body {
+            line-height: 2.2;
+            font-size: 1.25rem;
+            color: #e2e8f0;
+            margin-top: 20px;
+        }
+
+        .message-body p {
+            margin-bottom: 18px;
+        }
+
+        .highlight {
+            color: var(--accent-color);
+            font-weight: 800;
+        }
+
+        /* ----- معرض الصور مع البراويز الـ Polaroids ----- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 35px;
+            padding: 20px 10px;
+        }
+
+        /* براويز الصور الفخمة */
+        .photo-frame {
+            background: #ffffff;
+            padding: 15px 15px 25px 15px;
+            border-radius: 12px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+            transition: all 0.4s ease;
+            position: relative;
+            transform: rotate(var(--rotation, 0deg));
+        }
+
+        .photo-frame:hover {
+            transform: scale(1.06) rotate(0deg) !important;
+            z-index: 10;
+            box-shadow: 0 20px 40px var(--accent-glow);
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid #eee;
+        }
+
+        .photo-caption {
+            margin-top: 15px;
+            text-align: center;
+            color: #222;
+            font-weight: 700;
+            font-size: 1rem;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        /* القلوب المتطايرة */
+        .floating-heart {
+            position: fixed;
+            color: var(--accent-color);
+            pointer-events: none;
+            animation: floatUp 4s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .main-title { font-size: 2.8rem; letter-spacing: 2px; }
+            .message-container { padding: 30px 20px; }
+            .message-body { font-size: 1.05rem; }
+            .photo-frame img { height: 320px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 🔒 شاشة كلمة المرور -->
+    <div id="login-screen">
+        <div class="login-card">
+            <h2>🎉 مفاجأة خاصة جداً!</h2>
+            <p>اكتبي كلمة السر لفتح الهدية 🗝️</p>
+            <div class="input-group">
+                <input type="password" id="pass-input" placeholder="أدخلي كلمة السر...">
+            </div>
+            <button class="login-btn" onclick="checkPassword()">دخول ✨</button>
+            <div class="error-msg" id="error-msg">كلمة السر غير صحيحة، حاولي تاني! ❤️</div>
+        </div>
+    </div>
+
+    <!-- 🎈 المحتوى الرئيسي للموقع -->
+    <div id="main-content">
+        
+        <div class="message-container">
+            <!-- العنوان الكبير جداً والواضح -->
+            <h1 class="main-title">H.B.D Fatma</h1>
+
+            <div class="message-body">
+                <p>كل سنة وانتي طيبة يا أحلى وأجمل <span class="highlight">فاطمة</span> ❤️</p>
+                <p>نفضل نشوف ضحكتك اللي بتبسط كل اللي حواليكي بتنور الدنيا كلها 😊✨</p>
+                <p>
+                    يا رب تكون سنة جديدة مليانة بالخير والنجاح وراحة البال، وتفضلي دايماً الشخص اللطيف الجميل صاحب الأحاسيس المميزة والـ Mood الروعة اللي بيفرح أي مكان بتبقي فيه! ✨🎬
+                </p>
+                <p style="font-size: 1rem; color: var(--subtext-color); margin-top: 25px;">
+                    أتمنى ليكي أيام حلوة شبه قلبك الجميلة! 🎈🎂
+                </p>
+            </div>
+        </div>
+
+        <!-- معرض الصور الموزعة ببراويز بوب لارويد جميلة -->
+        <div class="gallery-grid">
+            
+            <div class="photo-frame" style="--rotation: -3deg;">
+                <img src="https://i.ibb.co/cSRBYwx8/image.jpg" alt="Fatma">
+                <div class="photo-caption">جمال المكان والروح ✨</div>
+            </div>
+
+            <div class="photo-frame" style="--rotation: 3deg;">
+                <img src="https://i.ibb.co/QF7ZnTD0/image.jpg" alt="Fatma">
+                <div class="photo-caption">ضحكة من القلب 🤍</div>
+            </div>
+
+            <div class="photo-frame" style="--rotation: -2deg;">
+                <img src="https://i.ibb.co/tPwqpz8S/image.jpg" alt="Fatma">
+                <div class="photo-caption">أحلى المودز واللحظات 🌃</div>
+            </div>
+
+            <div class="photo-frame" style="--rotation: 4deg;">
+                <img src="https://i.ibb.co/Vc1pcJRB/image.jpg" alt="Fatma">
+                <div class="photo-caption">ذكريات ورايقات 🃏🎬</div>
+            </div>
+
+            <div class="photo-frame" style="--rotation: -4deg;">
+                <img src="https://i.ibb.co/V0rdhKNq/image.jpg" alt="Fatma">
+                <div class="photo-caption">خروجات وأوقات لطيفة 🍦🍿</div>
+            </div>
+
+            <div class="photo-frame" style="--rotation: 3deg;">
+                <img src="https://i.ibb.co/MkMG3rRB/image.jpg" alt="Fatma">
+                <div class="photo-caption">الأنمي والأجواء الدافئة 🌸</div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        // كلمة المرور الجديدة للدخول
+        const CORRECT_PASSWORD = "KINDRED";
+
+        function checkPassword() {
+            const input = document.getElementById('pass-input').value;
+            const errorMsg = document.getElementById('error-msg');
+            const loginScreen = document.getElementById('login-screen');
+            const mainContent = document.getElementById('main-content');
+
+            if (input.trim().toUpperCase() === CORRECT_PASSWORD.toUpperCase()) {
+                loginScreen.style.opacity = '0';
+                setTimeout(() => {
+                    loginScreen.style.display = 'none';
+                    mainContent.style.display = 'block';
+                    setTimeout(() => {
+                        mainContent.style.opacity = '1';
+                    }, 50);
+                }, 800);
+
+                createHearts();
+            } else {
+                errorMsg.style.display = 'block';
+            }
+        }
+
+        document.getElementById('pass-input').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+
+        function createHearts() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('floating-heart');
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 5000);
+            }, 300);
+        }
+    </script>
+</body>
+</html>
