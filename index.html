@@ -216,40 +216,29 @@
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 20px;
-            padding: 16px;
+            padding: 12px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.4);
             backdrop-filter: blur(10px);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
+            /* زاوية الميلان متغيرة */
             transform: rotate(var(--rot, 0deg)); 
         }
 
         .photo-card:hover {
-            transform: translateY(-10px) scale(1.05) rotate(0deg);
+            transform: translateY(-10px) rotate(0deg);
             border-color: rgba(255, 75, 114, 0.5);
             box-shadow: 0 25px 45px rgba(0,0,0,0.6), 0 0 25px var(--accent-glow);
             z-index: 50;
         }
 
-        .photo-wrapper {
-            width: 100%;
-            border-radius: 14px;
-            overflow: hidden;
-            background: #0f1016;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* التعديل الجديد: عرض الصورة بالكامل بدون أي زووم أو قص */
+        /* التعديل الجذري: إظهار الصورة بالكامل بدون أي زووم أو قص */
         .photo-card img {
-            width: 100%;
-            height: auto; /* تأخذ الطول الطبيعي للصورة تماماً */
+            max-width: 100%;
+            height: auto;
             display: block;
-            border-radius: 14px;
+            border-radius: 12px;
+            object-fit: contain; /* ده اللي بيضمن إن الصورة تظهر بالكامل من غير ما يتقص منها أي حاجة */
+            margin: 0 auto;
         }
 
         /* القلوب المتطايرة */
@@ -313,21 +302,15 @@
             <!-- العمود الجانبي الأول (اليسار) -->
             <div class="side-column left-column">
                 <div class="photo-card" style="--rot: -4deg;">
-                    <div class="photo-wrapper">
-                        <img src="https://i.ibb.co/cSRBYwx8/image.jpg" alt="Fatma">
-                    </div>
+                    <img src="https://i.ibb.co/cSRBYwx8/image.jpg" alt="Fatma">
                 </div>
 
                 <div class="photo-card" style="--rot: 3deg;">
-                    <div class="photo-wrapper">
-                        <img src="https://i.ibb.co/tPwqpz8S/image.jpg" alt="Fatma">
-                    </div>
+                    <img src="https://i.ibb.co/tPwqpz8S/image.jpg" alt="Fatma">
                 </div>
 
                 <div class="photo-card" style="--rot: -2deg;">
-                    <div class="photo-wrapper">
-                        <img src="https://i.ibb.co/V0rdhKNq/image.jpg" alt="Fatma">
-                    </div>
+                    <img src="https://i.ibb.co/V0rdhKNq/image.jpg" alt="Fatma">
                 </div>
             </div>
 
@@ -346,21 +329,15 @@
             <!-- العمود الجانبي الثاني (اليمين) -->
             <div class="side-column right-column">
                 <div class="photo-card" style="--rot: 4deg;">
-                    <div class="photo-wrapper">
-                        <img src="https://i.ibb.co/QF7ZnTD0/image.jpg" alt="Fatma">
-                    </div>
+                    <img src="https://i.ibb.co/QF7ZnTD0/image.jpg" alt="Fatma">
                 </div>
 
                 <div class="photo-card" style="--rot: -3deg;">
-                    <div class="photo-wrapper">
-                        <img src="https://i.ibb.co/Vc1pcJRB/image.jpg" alt="Fatma">
-                    </div>
+                    <img src="https://i.ibb.co/Vc1pcJRB/image.jpg" alt="Fatma">
                 </div>
 
                 <div class="photo-card" style="--rot: 2deg;">
-                    <div class="photo-wrapper">
-                        <img src="https://i.ibb.co/MkMG3rRB/image.jpg" alt="Fatma">
-                    </div>
+                    <img src="https://i.ibb.co/MkMG3rRB/image.jpg" alt="Fatma">
                 </div>
             </div>
 
